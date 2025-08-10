@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanmargam - Classical Music Event</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+        }
+
+        /* Navigation Styles */
+        .navbar {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #f4d03f;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background-color: #f4d03f;
+            color: #2c3e50;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Main Content */
+        .main-content {
+            min-height: 80vh;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Home Page Styles */
+        .hero-section {
+            text-align: center;
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            margin-bottom: 2rem;
+        }
+
+        .event-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .detail-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            border-left: 4px solid #f4d03f;
+            transition: transform 0.3s ease;
+        }
+
+        .detail-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .detail-card h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .welcome-message {
+            background: #2c3e50;
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+        }
+
+        .welcome-message h2 {
+            color: #f4d03f;
+            margin-bottom: 1rem;
+        }
+
+        /* Quick Links Section */
+        .quick-links-section {
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .quick-links-section h2 {
+            color: #2c3e50;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .quick-link-card {
+            background: linear-gradient(135deg, #f8f9fa, #e3f2fd);
+            padding: 2rem;
+            border-radius: 15px;
+            color: #2c3e50;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            cursor: pointer;
+        }
+
+        .quick-link-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-color: #f4d03f;
+        }
+
+        .quick-link-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .quick-link-card p {
+            color: #7f8c8d;
+            line-height: 1.6;
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            padding: 3rem 0;
+            background: linear-gradient(135deg, #e8f5e8, #d4f1f4);
+            border-radius: 15px;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+        }
+
+        /* Sections */
+        .section {
+            margin: 3rem 0;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 15px;
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid #f4d03f;
+            padding-bottom: 0.5rem;
+            font-size: 1.8rem;
+        }
+
+        .section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* Donation Section */
+        .donation-section {
+            background: linear-gradient(135deg, #e8f5e8, #d4edda) !important;
+            border: 2px solid #28a745;
+        }
+
+        .fundraising-progress {
+            margin: 2rem 0;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .progress-bar {
+            background: #e0e0e0;
+            height: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #28a745, #20c997);
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.8s ease;
+            animation: progressAnimation 2s ease-in-out;
+        }
+
+        @keyframes progressAnimation {
+            from { width: 0; }
+        }
+
+        .progress-percentage {
+            text-align: center;
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        .donation-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .donate-btn, .website-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .donate-btn {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+        }
+
+        .donate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3);
+        }
+
+        .website-btn {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+        }
+
+        .website-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(44, 62, 80, 0.3);
+        }
+
+        .btn-icon {
+            font-size: 1.2rem;
+        }
+
+        /* Program Page */
+        .program-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .program-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            border-left: 4px solid #f4d03f;
+            transition: transform 0.3s ease;
+        }
+
+        .program-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .program-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-number {
+            background: #2c3e50;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50%;
+            font-weight: bold;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .item-time {
+            color: #7f8c8d;
+            font-style: italic;
+            font-weight: bold;
+        }
+
+        .item-details {
+            margin-top: 1rem;
+        }
+
+        .item-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-meta {
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .performer-name {
+            color: #2c3e50;
+            text-decoration: underline;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .performer-name:hover {
+            color: #f4d03f;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            animation: fadeIn 0.3s;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 2rem;
+            border: none;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            animation: slideIn 0.3s;
+            text-align: center;
+        }
+
+        @keyframes slideIn {
+            from {transform: translateY(-50px); opacity: 0;}
+            to {transform: translateY(0); opacity: 1;}
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: black;
+        }
+
+        .performer-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1rem;
+            display: block;
+            border: 4px solid #f4d03f;
+        }
+
+        .performer-details h2 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .performer-bio {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links {
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: #2c3e50;
+            margin: 0 0.5rem;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border: 1px solid #2c3e50;
+            border-radius: 5px;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .social-links a:hover {
+            background: #2c3e50;
+            color: white;
+        }
+
+        /* Admin Styles */
+        .admin-login {
+            max-width: 400px;
+            margin: 5rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin: 1rem 0;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .btn {
+            background: #2c3e50;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 0.5rem 0.5rem 0.5rem 0;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background: #34495e;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+            border: 1px solid #c3e6cb;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: #2c3e50;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .event-details {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-links {
+                grid-template-columns: 1fr;
+            }
+
+            .program-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .modal-content {
+                margin: 10% auto;
+                width: 95%;
+                padding: 1rem;
+            }
+
+            .donation-actions {
+                flex-direction: column;
+            }
+
+            .progress-info {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .stats-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .detail-card {
+                padding: 1.5rem;
+            }
+
+            .quick-link-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a class="logo" onclick="showPage('home')">Sanmargam</a>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a class="nav-link active" onclick="showPage('home')">Home</a></li>
+                <li><a class="nav-link" onclick="showPage('uskidsforwater')">US Kids for Water</a></li>
+                <li><a class="nav-link" onclick="showPage('program')">Program</a></li>
+            </ul>
+            <div class="hamburger" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Home Page -->
+            <div id="home-page" class="page active">
+                <div class="hero-section">
+                    <h1 class="hero-title" id="event-title">Sanmargam</h1>
+                    <p class="hero-subtitle" id="event-subtitle">A Classical Music Event</p>
+                </div>
+
+                <div class="event-details">
+                    <div class="detail-card">
+                        <h3>📅 Date</h3>
+                        <p id="event-date">March 15, 2025</p>
+                    </div>
+                    <div class="detail-card">
+                        <h3>⏰ Time</h3>
+                        <p id="event-time">6:00 PM - 9:00 PM</p>
+                    </div>
+                    <div class="detail-card">
+                        <h3>📍 Venue</h3>
+                        <p id="event-venue">Community Center Hall<br>123 Main Street, Sunnyvale, CA</p>
+                    </div>
+                </div>
+
+                <div class="welcome-message">
+                    <h2>Welcome to Sanmargam</h2>
+                    <p id="welcome-text">Join us for an evening of classical Indian music featuring talented performers from our community. Experience the beauty of traditional ragas and rhythms in an intimate setting.</p>
+                </div>
+
+                <!-- Optional Google Maps Embed -->
+                <div id="maps-container" style="margin-top: 2rem; text-align: center;">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3168.123456789!2d-122.0364837!3d37.4041960!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzfCsDI0JzE1LjEiTiAxMjLCsDAyJzExLjMiVw!5e0!3m2!1sen!2sus!4v1234567890"
+                        width="100%" 
+                        height="300" 
+                        style="border:0; border-radius: 10px;" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+
+                <!-- Quick Links Section -->
+                <div class="quick-links-section">
+                    <h2>Explore</h2>
+                    <div class="quick-links">
+                        <div class="quick-link-card" onclick="showPage('uskidsforwater')">
+                            <h3>🌊 Support Our Cause</h3>
+                            <p>Learn about US Kids for Water and how this event supports clean water access for children worldwide.</p>
+                        </div>
+                        <div class="quick-link-card" onclick="showPage('program')">
+                            <h3>🎵 View Program</h3>
+                            <p>Discover our lineup of 7 classical music performances and meet our talented performers.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- US Kids for Water Page -->
+            <div id="uskidsforwater-page" class="page">
+                <div class="page-header">
+                    <h1>🌊 US Kids for Water</h1>
+                    <p class="page-subtitle">Supporting Clean Water Access for Children Worldwide</p>
+                </div>
+                
+                <div class="section">
+                    <h2>About the Organization</h2>
+                    <p id="org-background">US Kids for Water is a nonprofit organization dedicated to providing clean water access to children in underserved communities. Founded by young activists, we believe that every child deserves access to safe, clean drinking water.</p>
+                </div>
+
+                <div class="section">
+                    <h2>Our Mission</h2>
+                    <p id="org-mission">We work with local communities and partners to build sustainable water infrastructure, educate about water conservation, and advocate for policies that protect water resources for future generations.</p>
+                </div>
+
+                <div class="stats-section">
+                    <div class="stat-card">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Children Helped</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">25</div>
+                        <div class="stat-label">Projects Completed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">10</div>
+                        <div class="stat-label">Countries Reached</div>
+                    </div>
+                </div>
+
+                <div class="section donation-section">
+                    <h2>Support Our Cause</h2>
+                    <p id="fundraising-details">This event helps raise funds for our current project: building water filtration systems in rural schools. Every dollar brings us closer to providing clean water to 500 children.</p>
+                    
+                    <div class="fundraising-progress">
+                        <div class="progress-info">
+                            <span><strong>Goal:</strong> <span id="fundraising-goal">$10,000</span></span>
+                            <span><strong>Raised:</strong> <span id="fundraising-raised">$6,500</span></span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-fill" style="width: 65%"></div>
+                        </div>
+                        <div class="progress-percentage" id="progress-percentage">65% Complete</div>
+                    </div>
+
+                    <div class="donation-actions">
+                        <a href="https://example-donation-site.com" target="_blank" class="donate-btn">
+                            <span class="btn-icon">💧</span>
+                            Donate Now
+                        </a>
+                        <a href="https://example-organization-site.com" target="_blank" class="website-btn">
+                            <span class="btn-icon">🌐</span>
+                            Visit Official Website
+                        </a>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>How Your Donation Helps</h2>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 1rem;">
+                        <div style="text-align: center; padding: 1rem;">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">💧</div>
+                            <h3>$25</h3>
+                            <p>Provides clean water for 1 child for 6 months</p>
+                        </div>
+                        <div style="text-align: center; padding: 1rem;">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏫</div>
+                            <h3>$100</h3>
+                            <p>Installs water filtration for 1 classroom</p>
+                        </div>
+                        <div style="text-align: center; padding: 1rem;">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🌍</div>
+                            <h3>$500</h3>
+                            <p>Provides clean water system for entire school</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Program Page -->
+            <div id="program-page" class="page">
+                <div class="page-header">
+                    <h1>🎵 Program Schedule</h1>
+                    <p class="page-subtitle">An Evening of Classical Indian Music</p>
+                </div>
+                <div id="program-list" class="program-list">
+                    <!-- Program items will be dynamically populated -->
+                </div>
+            </div>
+
+            <!-- Admin Page -->
+            <div id="admin-page" class="page">
+                <div class="admin-login" id="admin-login">
+                    <h2>🔐 Admin Login</h2>
+                    <div class="form-group">
+                        <label>Password:</label>
+                        <input type="password" id="admin-password" placeholder="Enter admin password">
+                    </div>
+                    <button class="btn" onclick="adminLogin()">Login</button>
+                    <div id="login-error" style="color: red; margin-top: 1rem; display: none;">Invalid password</div>
+                </div>
+
+                <div class="admin-dashboard hidden" id="admin-dashboard">
+                    <h1>📊 Admin Dashboard</h1>
+                    <div class="success-message hidden" id="save-message">Changes saved successfully!</div>
+                    
+                    <div class="section">
+                        <h2>Quick Actions</h2>
+                        <button class="btn" onclick="saveAllChanges()">💾 Save All Changes</button>
+                        <button class="btn" onclick="logout()" style="background: #dc3545;">🚪 Logout</button>
+                    </div>
+                    
+                    <div class="section">
+                        <h2>Content Management</h2>
+                        <p>Use the sections below to edit all website content. Changes will be reflected immediately after saving.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Performer Modal -->
+    <div id="performer-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modal-content">
+                <!-- Performer details will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data structure to store all content
+        let siteData = {
+            home: {
+                title: "Sanmargam",
+                subtitle: "A Classical Music Event",
+                date: "March 15, 2025",
+                time: "6:00 PM - 9:00 PM",
+                venue: "Community Center Hall\n123 Main Street, Sunnyvale, CA",
+                welcome: "Join us for an evening of classical Indian music featuring talented performers from our community. Experience the beauty of traditional ragas and rhythms in an intimate setting."
+            },
+            uskidsforwater: {
+                background: "US Kids for Water is a nonprofit organization dedicated to providing clean water access to children in underserved communities. Founded by young activists, we believe that every child deserves access to safe, clean drinking water.",
+                mission: "We work with local communities and partners to build sustainable water infrastructure, educate about water conservation, and advocate for policies that protect water resources for future generations.",
+                fundraisingDetails: "This event helps raise funds for our current project: building water filtration systems in rural schools. Every dollar brings us closer to providing clean water to 500 children.",
+                goal: "$10,000",
+                raised: "$6,500"
+            },
+            program: [
+                {
+                    id: 1,
+                    number: 1,
+                    name: "Varnam in Kalyani",
+                    ragam: "Kalyani",
+                    thalam: "Adi",
+                    performer: "Priya Sharma",
+                    time: "6:15 PM"
+                },
+                {
+                    id: 2,
+                    number: 2,
+                    name: "Kriti in Shankarabharanam",
+                    ragam: "Shankarabharanam",
+                    thalam: "Rupaka",
+                    performer: "Ravi Kumar",
+                    time: "6:45 PM"
+                },
+                {
+                    id: 3,
+                    number: 3,
+                    name: "Javali in Kamas",
+                    ragam: "Kamas",
+                    thalam: "Adi",
+                    performer: "Meera Patel",
+                    time: "7:15 PM"
+                },
+                {
+                    id: 4,
+                    number: 4,
+                    name: "Ragam Tanam Pallavi",
+                    ragam: "Bhairavi",
+                    thalam: "Adi",
+                    performer: "Arjun Nair",
+                    time: "7:45 PM"
+                },
+                {
+                    id: 5,
+                    number: 5,
+                    name: "Tillana in Dhanashri",
+                    ragam: "Dhanashri",
+                    thalam: "Adi",
+                    performer: "Lakshmi Iyer",
+                    time: "8:15 PM"
+                },
+                {
+                    id: 6,
+                    number: 6,
+                    name: "Bhajan",
+                    ragam: "Yaman",
+                    thalam: "Keherwa",
+                    performer: "Rohit Agarwal",
+                    time: "8:35 PM"
+                },
+                {
+                    id: 7,
+                    number: 7,
+                    name: "Mangalam",
+                    ragam: "Madhyamavati",
+                    thalam: "Adi",
+                    performer: "Ensemble",
+                    time: "8:55 PM"
+                }
+            ],
+            performers: {
+                "Priya Sharma": {
+                    name: "Priya Sharma",
+                    bio: "A dedicated student of Carnatic music for over 15 years, Priya specializes in traditional compositions and has performed at various cultural events across the Bay Area.",
+                    photo: "images/priya.jpg",
+                    social: {
+                        instagram: "https://instagram.com/priyasharmamusic",
+                        youtube: "https://youtube.com/priyasharma"
+                    }
+                },
+                "Ravi Kumar": {
+                    name: "Ravi Kumar",
+                    bio: "An accomplished violinist and vocalist, Ravi brings a unique blend of classical training and contemporary expression to his performances.",
+                    photo: "images/ravi.jpg",
+                    social: {
+                        facebook: "https://facebook.com/ravikumarmusic",
+                        website: "https://ravikumarmusic.com"
+                    }
+                },
+                "Meera Patel": {
+                    name: "Meera Patel",
+                    bio: "A versatile performer who excels in both vocal music and dance, Meera brings emotional depth to every composition she performs.",
+                    photo: "images/meera.jpg",
+                    social: {
+                        instagram: "https://instagram.com/meeramusic"
+                    }
+                },
+                "Arjun Nair": {
+                    name: "Arjun Nair",
+                    bio: "Known for his improvisational skills and deep understanding of ragas, Arjun is considered one of the most promising young musicians in the community.",
+                    photo: "images/arjun.jpg",
+                    social: {
+                        youtube: "https://youtube.com/arjunnairmusic",
+                        website: "https://arjunnair.com"
+                    }
+                },
+                "Lakshmi Iyer": {
+                    name: "Lakshmi Iyer",
+                    bio: "A graceful performer with expertise in both classical vocals and instrumental music, Lakshmi has been learning music for over two decades.",
+                    photo: "images/lakshmi.jpg",
+                    social: {
+                        facebook: "https://facebook.com/lakshmimusic"
+                    }
+                },
+                "Rohit Agarwal": {
+                    name: "Rohit Agarwal",
+                    bio: "A soulful bhajan singer who connects deeply with audiences through his devotional performances and melodious voice.",
+                    photo: "images/rohit.jpg",
+                    social: {
+                        instagram: "https://instagram.com/rohitbhajans"
+                    }
+                },
+                "Ensemble": {
+                    name: "Ensemble",
+                    bio: "Our talented group of musicians comes together for the closing Mangalam, representing the unity and harmony of our musical community.",
+                    photo: "images/ensemble.jpg",
+                    social: {}
+                }
+            }
+        };
+
+        // Admin password
+        const ADMIN_PASSWORD = "sanmargam2025";
+
+        // Initialize the website
+        document.addEventListener('DOMContentLoaded', function() {
+            loadContent();
+            renderProgramList();
+            
+            // Check if current URL contains admin
+            if (window.location.hash === '#admin' || window.location.search.includes('admin')) {
+                showPage('admin');
+            }
+        });
+
+        // Navigation functions
+        function showPage(pageName) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Show selected page
+            const targetPage = document.getElementById(pageName + '-page');
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+            
+            // Update navigation
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => link.classList.remove('active'));
+            
+            // Find and activate the correct nav link
+            const activeLink = Array.from(navLinks).find(link => 
+                link.textContent.toLowerCase().replace(/\s+/g, '') === pageName.toLowerCase().replace(/\s+/g, '')
+            );
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+            
+            // Update URL hash
+            window.location.hash = pageName;
+            
+            // Close mobile menu if open
+            document.getElementById('nav-menu').classList.remove('active');
+        }
+
+        function toggleMobileMenu() {
+            const navMenu = document.getElementById('nav-menu');
+            navMenu.classList.toggle('active');
+        }
+
+        // Content loading functions
+        function loadContent() {
+            // Load home content
+            updateElementContent('event-title', siteData.home.title);
+            updateElementContent('event-subtitle', siteData.home.subtitle);
+            updateElementContent('event-date', siteData.home.date);
+            updateElementContent('event-time', siteData.home.time);
+            updateElementContent('event-venue', siteData.home.venue);
+            updateElementContent('welcome-text', siteData.home.welcome);
+            
+            // Load US Kids for Water content
+            updateElementContent('org-background', siteData.uskidsforwater.background);
+            updateElementContent('org-mission', siteData.uskidsforwater.mission);
+            updateElementContent('fundraising-details', siteData.uskidsforwater.fundraisingDetails);
+            updateElementContent('fundraising-goal', siteData.uskidsforwater.goal);
+            updateElementContent('fundraising-raised', siteData.uskidsforwater.raised);
+            
+            updateProgressBar();
+        }
+
+        function updateElementContent(id, content) {
+            const element = document.getElementById(id);
+            if (element && content) {
+                element.innerHTML = content.replace(/\n/g, '<br>');
+            }
+        }
+
+        function updateProgressBar() {
+            const goalElement = document.getElementById('fundraising-goal');
+            const raisedElement = document.getElementById('fundraising-raised');
+            
+            if (goalElement && raisedElement) {
+                const goal = parseFloat(goalElement.textContent.replace(/[$,]/g, ''));
+                const raised = parseFloat(raisedElement.textContent.replace(/[$,]/g, ''));
+                const percentage = Math.round((raised / goal) * 100);
+                
+                const progressFill = document.getElementById('progress-fill');
+                const progressPercentage = document.getElementById('progress-percentage');
+                
+                if (progressFill && progressPercentage) {
+                    progressFill.style.width = percentage + '%';
+                    progressPercentage.textContent = percentage + '% Complete';
+                }
+            }
+        }
+
+        // Program functions
+        function renderProgramList() {
+            const programList = document.getElementById('program-list');
+            if (!programList) return;
+            
+            programList.innerHTML = '';
+            
+            siteData.program.forEach(item => {
+                const programItem = document.createElement('div');
+                programItem.className = 'program-item';
+                
+                programItem.innerHTML = `
+                    <div class="program-header">
+                        <div class="item-number">${item.number}</div>
+                        <div class="item-time">${item.time}</div>
+                    </div>
+                    <div class="item-details">
+                        <div class="item-name">${item.name}</div>
+                        <div class="item-meta">
+                            <strong>Ragam:</strong> ${item.ragam} | <strong>Thalam:</strong> ${item.thalam}
+                        </div>
+                        <div class="item-performer">
+                            <strong>Performer:</strong> <span class="performer-name" onclick="openPerformerModal('${item.performer}')">${item.performer}</span>
+                        </div>
+                    </div>
+                `;
+                
+                programList.appendChild(programItem);
+            });
+        }
+
+        // Modal functions
+        function openPerformerModal(performerName) {
+            const performer = siteData.performers[performerName];
+            if (!performer) return;
+            
+            const modalContent = document.getElementById('modal-content');
+            
+            let socialLinksHtml = '';
+            if (performer.social && Object.keys(performer.social).length > 0) {
+                socialLinksHtml = '<div class="social-links">';
+                for (const [platform, url] of Object.entries(performer.social)) {
+                    socialLinksHtml += `<a href="${url}" target="_blank">${platform.charAt(0).toUpperCase() + platform.slice(1)}</a>`;
+                }
+                socialLinksHtml += '</div>';
+            }
+            
+            modalContent.innerHTML = `
+                <img src="${performer.photo}" alt="${performer.name}" class="performer-photo" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUwIiBoZWlnaHQ9IjE1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtc2l6ZT0iMTgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj7wn46t77iPPC90ZXh0Pjwvc3ZnPg=='">
+                <div class="performer-details">
+                    <h2>${performer.name}</h2>
+                    <p class="performer-bio">${performer.bio}</p>
+                    ${socialLinksHtml}
+                </div>
+            `;
+            
+            document.getElementById('performer-modal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('performer-modal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('performer-modal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Admin functions
+        function adminLogin() {
+            const password = document.getElementById('admin-password').value;
+            const loginError = document.getElementById('login-error');
+            
+            if (password === ADMIN_PASSWORD) {
+                document.getElementById('admin-login').style.display = 'none';
+                document.getElementById('admin-dashboard').classList.remove('hidden');
+                document.getElementById('admin-dashboard').style.display = 'block';
+                loginError.style.display = 'none';
+            } else {
+                loginError.style.display = 'block';
+                loginError.textContent = 'Invalid password. Please try again.';
+            }
+        }
+
+        function logout() {
+            document.getElementById('admin-login').style.display = 'block';
+            document.getElementById('admin-dashboard').style.display = 'none';
+            document.getElementById('admin-password').value = '';
+        }
+
+        function saveAllChanges() {
+            const saveMessage = document.getElementById('save-message');
+            saveMessage.classList.remove('hidden');
+            
+            setTimeout(() => {
+                saveMessage.classList.add('hidden');
+            }, 3000);
+        }
+
+        // Handle hash changes for navigation
+        window.addEventListener('hashchange', function() {
+            const hash = window.location.hash.substring(1);
+            if (hash && ['home', 'uskidsforwater', 'program', 'admin'].includes(hash)) {
+                showPage(hash);
+            }
+        });
+
+        // Initialize page based on hash
+        window.addEventListener('load', function() {
+            const hash = window.location.hash.substring(1);
+            if (hash && ['home', 'uskidsforwater', 'program', 'admin'].includes(hash)) {
+                showPage(hash);
+            }
+        });
+    </script>
+</body>
+</html>
+                    
